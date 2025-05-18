@@ -133,9 +133,10 @@ def main():
         math_preds = []
         with paddle.no_grad():
             for i, images in enumerate(tqdm(val_dataset)):
-                generated_ids = model.generate(images)
+                # return_pred_ids is for paddle, to directly return pred_ids.
+                generated_ids = model.generate(images, return_pred_ids = True)
                 generated_text = processor.batch_decode(
-                    generated_ids, skip_special_tokens=True
+                    generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=None
                 )[0]
 
                 print(f"\ngt: {math_gts[i]}\npreds: {generated_text}\n")

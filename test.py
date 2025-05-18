@@ -94,7 +94,7 @@ def setup_seeds(seed=3):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--exp_name", type=str, default="test")
+    parser.add_argument("--exp_name", type=str, default="Exp8")
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

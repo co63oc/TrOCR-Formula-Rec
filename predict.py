@@ -14,23 +14,21 @@ from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 
 device = torch.device("cuda")
 
-img_path = "dataset/UniMER-Test/cpe/0000013.png"
+img_path = "dataset/UniMER-Test/spe/0000302.png"
+img_path = "dataset/UniMER-Test/spe/0000035.png"
 img = Image.open(img_path).convert("RGB")
 img_stem = Path(img_path).stem
 
 s1 = time.perf_counter()
 print("Loading model")
-model_path = "outputs/checkpoint-27738"
+model_path = "outputs/Exp8/latest"
 processor = TrOCRProcessor.from_pretrained("microsoft/trocr-small-stage1")
 model = VisionEncoderDecoderModel.from_pretrained(model_path).to(device)
 print("Finished loading model.")
-
 s2 = time.perf_counter()
 
 pixel_values = processor(img, return_tensors="pt").pixel_values
 pixel_values = pixel_values.to(device)
-print(pixel_values.shape)
-
 generated_ids = model.generate(pixel_values)
 generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
 s3 = time.perf_counter()

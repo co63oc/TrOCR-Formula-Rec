@@ -95,7 +95,7 @@ def get_HME100K_dataset(img_dir: Path, txt_path: str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--exp_name", type=str, default="test")
+    parser.add_argument("--exp_name", type=str, default="Exp8")
     args = parser.parse_args()
 
     train_dir = Path("dataset/UniMER-1M")
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
     max_target_length = 512
 
-    model_name = "microsoft/trocr-small-stage1"
+    model_name = "./trocr-small-stage1"
     processor = TrOCRProcessor.from_pretrained(model_name)
 
     tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)

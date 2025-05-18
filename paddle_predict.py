@@ -24,10 +24,9 @@ model = VisionEncoderDecoderModel.from_pretrained(model_path)
 print("Finished loading model.")
 s2 = time.perf_counter()
 
-generated_ids = model.generate(pixel_values)
-print(generated_ids)
-generated_ids = generated_ids[0]
-generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+# return_pred_ids is for paddle, to directly return pred_ids.
+generated_ids = model.generate(pixel_values, return_pred_ids = True)
+generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=None)[0]
 s3 = time.perf_counter()
 
 print(generated_text)
